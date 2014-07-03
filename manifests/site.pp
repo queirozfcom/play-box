@@ -59,8 +59,9 @@ class sublime{
 }
 
 class chrome{
-	require fix_broken
+	
 	exec{'download chrome deb':
+		require => Class['fix_broken'],
 		command => 'wget https://dl.google.com/linux/direct/google-chrome-stable_current_i386.deb',
 		cwd => "/home/${username}/Downloads",
 		creates => "/home/${username}/Downloads/google-chrome-stable_current_i386.deb",
@@ -75,28 +76,23 @@ class chrome{
 		creates => "/home/${username}/Desktop/google-chrome",
 	} ->
 	exec{'set permissions':
-		command =>"chmod +x /home/${username}/Desktop/*.desktop",
+		command =>"chmod +x /home/${username}/Desktop/*",
+		provider => 'shell',
 	}
 }
 
 class fix_broken{
 	exec{'fix-broken-command':
 		command => 'apt-get -f install --assume-yes',
-		require => Class['sublime'],
 	}
 }
 
 class gui{
-	require fix_broken
-	require java
-	require chrome
-	require sublime
-	require git
-	require home
 	
 	package{'xubuntu-desktop':
 		ensure => 'installed',
 		install_options => ['--no-install-recommends'],
+		require => Class['chrome','fix_broken','java','home','sublime','git'],
 	} ->
 	package{'xubuntu-icon-theme':
 		ensure => 'installed',
