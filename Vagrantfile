@@ -34,6 +34,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      vb.memory = 1024
   end
 	
+  # install puppetlabs/stdlib module
   config.vm.provision :shell, :inline => "mkdir -p /etc/puppet/modules && ( (puppet module list | grep puppetlabs-stdlib) || puppet module install puppetlabs/stdlib)"
 	
   # Enable provisioning with Puppet stand alone.  Puppet manifests
