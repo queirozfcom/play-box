@@ -29,7 +29,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
      vb.gui = true
   
      # Use VBoxManage to customize the VM. For example to change memory:
-     vb.name = 'play_vm'
+     vb.name = 'play-box'
 
      vb.memory = 1024
   end
