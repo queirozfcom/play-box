@@ -123,10 +123,30 @@ class scala{
   require java
   exec{'download activator':
     command => "wget http://downloads.typesafe.com/typesafe-activator/1.2.3/typesafe-activator-1.2.3.zip",
-    cwd => "/home/${username}",
-    creates => "/home/${username}/typesafe-activator-1.2.3.zip",
-    owner => "${username}"
+    cwd => "/home/${username}/Downloads",
+    creates => "/home/${username}/Downloads/typesafe-activator-1.2.3.zip",
+    owner => "${username}",
+  }->
+  package{'unzip':
+    ensure => 'installed',
+  } ->
+  exec{'unzip activator package':
+    exec => "unzip typesafe-activator-1.2.3.zip",
+    cwd => "/home/${username}/Downloads",
+    creates => "/home/${username}/Downloads/activator-1.2.3/",
+  } ->
+  exec {'add shortcut to desktop':
+    command => "ln -s /home/${username}/activator-1.2.3/activator /home/${username}/Desktop/activator",
+  } ->
+  exec{'set execution permission for the shortcut':
+    command => 'chmod +x /home/${username}/Desktop/activator'
+  } ->
+  file_line{'add activator to path':
+    # don't want to get mized up with $ as bash variable!
+    line => 'PATH=$PATH:/home/'+$username+'/Downloads/activator-1.2.3'
+    path => "/home/${username}/.bashrc"
   }
+
 }
 
 include git
