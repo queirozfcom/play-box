@@ -78,7 +78,7 @@ class chrome{
         creates => "/home/${username}/Desktop/google-chrome",
     } ->
     exec{'set permissions':
-        command =>"chmod +x /home/${username}/Desktop/*",
+        command =>"chmod +x /home/${username}/Desktop/google-chrome",
         provider => 'shell',
     }
 }
