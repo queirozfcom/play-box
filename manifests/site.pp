@@ -49,7 +49,7 @@ class sublime{
     exec{'extract':
         command => "tar -jxvf sublime_text2.0.2.tar.bz2",
         cwd => "/home/${username}/Downloads",
-        creates =>"/home/${username}/Downloads/Sublime\\ Text\\ 2",
+        creates =>"/home/${username}/Downloads/Sublime\\ Text\\ 2/",
     } ->
     file{"/home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text":
       ensure => 'present',
