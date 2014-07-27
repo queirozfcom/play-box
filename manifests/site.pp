@@ -125,7 +125,7 @@ class scala{
     command => "wget http://downloads.typesafe.com/typesafe-activator/1.2.3/typesafe-activator-1.2.3.zip",
     cwd => "/home/${username}/Downloads",
     creates => "/home/${username}/Downloads/typesafe-activator-1.2.3.zip",
-    owner => "${username}",
+    user => "${username}",
   }->
   package{'unzip':
     ensure => 'installed',
