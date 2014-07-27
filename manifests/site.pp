@@ -140,7 +140,7 @@ class scala{
     mode => '+x',
   } ->
   file_line{'add activator to path':
-    line => "PATH=$PATH:/home/${username}/Downloads/activator-1.2.3",
+    line => "PATH=\$PATH:/home/${username}/Downloads/activator-1.2.3",
     ensure => 'present',
     path => "/home/${username}/.bashrc",
   }
