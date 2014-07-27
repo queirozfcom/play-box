@@ -55,7 +55,10 @@ class sublime{
     exec {'create desktop link':
         command => "ln -s /home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text /home/${username}/Desktop/sublime_text",
         creates => "/home/${username}/Desktop/sublime_text",
-    }   
+    } ->
+    exec{"chmod +x /home/${username}/Desktop/sublime-text":
+        provider => 'shell',
+    }  
 }
 
 class chrome{
@@ -73,12 +76,10 @@ class chrome{
         cwd => "/home/${username}/Downloads",
         creates => "/usr/bin/google-chrome",
     } -> 
-    exec{'add shortcuts to desktop':
-        command => "ln -s /usr/bin/google-chrome /home/${username}/Desktop/google-chrome",
+    exec{"ln -s /usr/bin/google-chrome /home/${username}/Desktop/google-chrome":
         creates => "/home/${username}/Desktop/google-chrome",
     } ->
-    exec{'set permissions':
-        command =>"chmod +x /home/${username}/Desktop/google-chrome",
+    exec{"chmod +x /home/${username}/Desktop/google-chrome":
         provider => 'shell',
     }
 }
@@ -136,12 +137,11 @@ class scala{
     cwd => "/home/${username}/Downloads",
     creates => "/home/${username}/Downloads/activator-1.2.3/",
   } ->
-  exec {'add shortcut to desktop':
-    command => "ln -s /home/${username}/activator-1.2.3/activator /home/${username}/Desktop/activator",
+  exec {"ln -s /home/${username}/activator-1.2.3/activator /home/${username}/Desktop/activator":
     creates => "/home/${username}/Desktop/activator",
   } ->
-  exec{'set execution permission for the shortcut':
-    command => "chmod +x /home/${username}/Desktop/activator",
+  exec{"chmod +x /home/${username}/Desktop/activator":
+    provider => "shell",
   } ->
   file_line{'add activator to path':
     line => "PATH=$PATH:/home/${username}/Downloads/activator-1.2.3",
