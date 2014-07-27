@@ -121,6 +121,7 @@ class java{
 
 class scala{
   require java
+  require home
   exec{'download activator':
     command => "wget http://downloads.typesafe.com/typesafe-activator/1.2.3/typesafe-activator-1.2.3.zip",
     cwd => "/home/${username}/Downloads",
@@ -131,7 +132,7 @@ class scala{
     ensure => 'installed',
   } ->
   exec{'unzip activator package':
-    exec => "unzip typesafe-activator-1.2.3.zip",
+    command => "unzip typesafe-activator-1.2.3.zip",
     cwd => "/home/${username}/Downloads",
     creates => "/home/${username}/Downloads/activator-1.2.3/",
   } ->
