@@ -52,6 +52,10 @@ class sublime{
         cwd => "/home/${username}/Downloads",
         creates =>"/home/${username}/Downloads/Sublime\\ Text\\ 2",
     } ->
+    file{"/home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text":
+      ensure => 'present',
+      mode => '+x',  
+    } ->
     file {"/home/${username}/Desktop/sublime_text":
         ensure =>'link',
         target => "/home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text",
@@ -134,9 +138,13 @@ class scala{
     cwd => "/home/${username}/Downloads",
     creates => "/home/${username}/Downloads/activator-1.2.3/",
   } ->
+  file{"/home/${username}/Downloads/activator-1.2.3/activator":
+    ensure => 'present',
+    mode => "+x",
+  } ->
   file{"/home/${username}/Desktop/activator":
     ensure => 'link',
-    target => "/home/${username}/activator-1.2.3/activator",
+    target => "/home/${username}/Downloads/activator-1.2.3/activator",
     mode => '+x',
   } ->
   file_line{'add activator to path':
