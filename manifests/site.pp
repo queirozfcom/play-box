@@ -42,7 +42,7 @@ class sublime{
     
     exec{'download':
         require => Class['home'],
-        command => "wget http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.2.tar.bz2",
+        command => 'wget http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.2.tar.bz2',
         cwd => "/home/${username}/Downloads",
         # only if it hasn't already been done.
         creates => "/home/${username}/Downloads/Sublime\\ Text\\ 2.0.2.tar.bz2",
@@ -121,7 +121,7 @@ class scala{
   require java
   require home
   exec{'download activator':
-    command => "wget http://downloads.typesafe.com/typesafe-activator/1.2.3/typesafe-activator-1.2.3.zip",
+    command => 'wget http://downloads.typesafe.com/typesafe-activator/1.2.3/typesafe-activator-1.2.3.zip',
     cwd => "/home/${username}/Downloads",
     creates => "/home/${username}/Downloads/typesafe-activator-1.2.3.zip",
     user => "${username}",
