@@ -142,8 +142,8 @@ class scala{
     command => 'chmod +x /home/${username}/Desktop/activator'
   } ->
   file_line{'add activator to path':
-    # don't want to get mized up with $ as bash variable!
-    line => 'PATH=$PATH:/home/'+$username+'/Downloads/activator-1.2.3',
+    line => "PATH=$PATH:/home/${username}/Downloads/activator-1.2.3",
+    ensure => 'present',
     path => "/home/${username}/.bashrc",
   }
 
