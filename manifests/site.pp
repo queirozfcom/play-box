@@ -138,9 +138,10 @@ class scala{
   } ->
   exec {'add shortcut to desktop':
     command => "ln -s /home/${username}/activator-1.2.3/activator /home/${username}/Desktop/activator",
+    creates => "/home/${username}/Desktop/activator",
   } ->
   exec{'set execution permission for the shortcut':
-    command => 'chmod +x /home/${username}/Desktop/activator'
+    command => "chmod +x /home/${username}/Desktop/activator",
   } ->
   file_line{'add activator to path':
     line => "PATH=$PATH:/home/${username}/Downloads/activator-1.2.3",
