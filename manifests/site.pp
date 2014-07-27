@@ -143,8 +143,8 @@ class scala{
   } ->
   file_line{'add activator to path':
     # don't want to get mized up with $ as bash variable!
-    line => 'PATH=$PATH:/home/'+$username+'/Downloads/activator-1.2.3'
-    path => "/home/${username}/.bashrc"
+    line => 'PATH=$PATH:/home/'+$username+'/Downloads/activator-1.2.3',
+    path => "/home/${username}/.bashrc",
   }
 
 }
