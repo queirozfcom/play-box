@@ -120,12 +120,12 @@ class java{
 class scala{
   require java
   require home
-  exec{'download activator':
-    command => 'wget http://downloads.typesafe.com/typesafe-activator/1.2.3/typesafe-activator-1.2.3.zip',
-    cwd => "/home/${username}/Downloads",
-    creates => "/home/${username}/Downloads/typesafe-activator-1.2.3.zip",
-    user => "${username}",
-  }->
+
+  wget::fetch { 'http://downloads.typesafe.com/typesafe-activator/1.2.3/typesafe-activator-1.2.3.zip':
+    destination => "/home/${username}/Downloads/typesafe-activator-1.2.3.zip",
+    timeout     => 0,
+    verbose     => false,
+  } ->
   package{'unzip':
     ensure => 'installed',
   } ->
@@ -146,7 +146,7 @@ class scala{
   }
 
 }
-
+include wget
 include git
 include gui
 include sublime
