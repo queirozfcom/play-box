@@ -39,26 +39,25 @@ class home{
 }
 
 class sublime{
-    
-    exec{'download':
-        require => Class['home'],
-        command => 'wget http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.2.tar.bz2',
-        cwd => "/home/${username}/Downloads",
-        # only if it hasn't already been done.
-        creates => "/home/${username}/Downloads/Sublime\\ Text\\ 2.0.2.tar.bz2",
+    require home
+
+    wget::fetch { 'http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.2.tar.bz2':
+        destination => "/home/${username}/Downloads/sublime_text2.0.2.tar.bz2",
+        timeout     => 0,
+        verbose     => false,
     } ->
     exec{'extract':
-        command => "tar -jxvf Sublime\\ Text\\ 2.0.2.tar.bz2",
+        command => "tar -jxvf sublime_text2.0.2.tar.bz2",
         cwd => "/home/${username}/Downloads",
-        creates =>"/home/${username}/Downloads/Sublime\\ Text\\ 2",
+        creates =>"/home/${username}/Downloads/sublime_text2.0.2",
     } ->
-    file{"/home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text":
+    file{"/home/${username}/Downloads/sublime_text2.0.2/sublime_text":
       ensure => 'present',
       mode => '+x',  
     } ->
     file {"/home/${username}/Desktop/sublime_text":
         ensure =>'link',
-        target => "/home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text",
+        target => "/home/${username}/Downloads/sublime_text2.0.2/sublime_text",
         mode => '+x',
     }
 }
