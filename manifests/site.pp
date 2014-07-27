@@ -51,13 +51,13 @@ class sublime{
         cwd => "/home/${username}/Downloads",
         creates =>"/home/${username}/Downloads/sublime_text2.0.2",
     } ->
-    file{"/home/${username}/Downloads/sublime_text2.0.2/sublime_text":
+    file{"/home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text":
       ensure => 'present',
       mode => '+x',  
     } ->
     file {"/home/${username}/Desktop/sublime_text":
         ensure =>'link',
-        target => "/home/${username}/Downloads/sublime_text2.0.2/sublime_text",
+        target => "/home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text",
         mode => '+x',
     }
 }
