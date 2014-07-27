@@ -52,13 +52,11 @@ class sublime{
         cwd => "/home/${username}/Downloads",
         creates =>"/home/${username}/Downloads/Sublime\\ Text\\ 2",
     } ->
-    exec {'create desktop link':
-        command => "ln -s /home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text /home/${username}/Desktop/sublime_text",
-        creates => "/home/${username}/Desktop/sublime_text",
-    } ->
-    exec{"chmod +x /home/${username}/Desktop/sublime-text":
-        provider => 'shell',
-    }  
+    file {"/home/${username}/Desktop/sublime_text":
+        ensure =>'link',
+        target => "/home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text",
+        mode => '+x',
+    }
 }
 
 class chrome{
@@ -75,12 +73,11 @@ class chrome{
         command => 'dpkg -i google-chrome-stable_current_i386.deb',
         cwd => "/home/${username}/Downloads",
         creates => "/usr/bin/google-chrome",
-    } -> 
-    exec{"ln -s /usr/bin/google-chrome /home/${username}/Desktop/google-chrome":
-        creates => "/home/${username}/Desktop/google-chrome",
     } ->
-    exec{"chmod +x /home/${username}/Desktop/google-chrome":
-        provider => 'shell',
+    file{"/home/${username}/Desktop/google-chrome":
+        ensure => 'link',
+        target => "/usr/bin/google-chrome",
+        mode => '+x',
     }
 }
 
@@ -137,11 +134,10 @@ class scala{
     cwd => "/home/${username}/Downloads",
     creates => "/home/${username}/Downloads/activator-1.2.3/",
   } ->
-  exec {"ln -s /home/${username}/activator-1.2.3/activator /home/${username}/Desktop/activator":
-    creates => "/home/${username}/Desktop/activator",
-  } ->
-  exec{"chmod +x /home/${username}/Desktop/activator":
-    provider => "shell",
+  file{"/home/${username}/Desktop/activator":
+    ensure => 'link',
+    target => "/home/${username}/activator-1.2.3/activator",
+    mode => '+x',
   } ->
   file_line{'add activator to path':
     line => "PATH=$PATH:/home/${username}/Downloads/activator-1.2.3",
