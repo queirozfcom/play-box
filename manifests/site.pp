@@ -42,24 +42,22 @@ class sublime{
     require home
 
     wget::fetch { 'http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.2.tar.bz2':
-        destination => "/home/${username}/Downloads/sublime_text2.0.2.tar.bz2",
+        destination => "/home/${username}/Downloads/Sublime Text 2.0.2.tar.bz2",
         timeout     => 0,
-        verbose     => false,
+        verbose     => true,
     } ->
     exec{'extract':
-        command => "tar -jxvf sublime_text2.0.2.tar.bz2",
+        command => "tar jxvf Sublime Text 2.0.2.tar.bz2",
         cwd => "/home/${username}/Downloads",
-        creates =>"/home/${username}/Downloads/Sublime\\ Text\\ 2/",
+        creates =>"/home/${username}/Downloads/Sublime Text 2",
     } ->
-    file{"dasdasd":
-      path => "/home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text",
-      ensure => 'present',
-      mode => '+x',  
+    file{"/home/${username}/Downloads/Sublime Text 2/sublime_text":
+      ensure => present,
+      mode => '+x',
     } ->
-    file {"asdsad":
-        path => "/home/${username}/Desktop/sublime_text",
-        ensure =>'link',
-        target => "/home/${username}/Downloads/Sublime\\ Text\\ 2/sublime_text",
+    file {"/home/${username}/Desktop/sublime_text":
+        ensure =>link,
+        target => "/home/${username}/Downloads/Sublime Text 2/sublime_text",
         mode => '+x',
     }
 }
@@ -96,10 +94,10 @@ class gui{
 
   package{'xfce4':
     require => Exec['sys_update'],
-    ensure => 'installed'       
+    ensure => 'installed'
   } ->
   package {'lightdm':
-    ensure => 'installed',    
+    ensure => 'installed',
   } ->
   package {'lightdm-gtk-greeter':
     ensure => 'installed',
@@ -164,5 +162,3 @@ include home
 include fix_broken
 include java
 include scala
-
-
