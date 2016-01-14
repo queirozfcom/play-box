@@ -19,6 +19,13 @@ class git {
         require => Exec['sys_update'],
     }
 }
+    
+class gnometerm{
+    package{'gnome-terminal':
+        ensure => 'installed',
+        require => Exec['sys_update'],
+    }
+}
 
 class home{
     user { "${username}":
@@ -162,3 +169,4 @@ include home
 include fix_broken
 include java
 include scala
+include gnometerm
